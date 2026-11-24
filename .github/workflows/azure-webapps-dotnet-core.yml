@@ -32,15 +32,15 @@ jobs:
 
       # run standard unit tests
       - name: Run Unit Tests
-        run: dotnet test unittestBP/unittestBP.csproj  --verbosity normal -l:trx
+        run: dotnet test unittestBP/unittestBP.csproj --configuration Release --no-build --verbosity normal -l:trx
 
       # run Specflow+ tests
       - name: Run Acceptance Tests 
-        run: dotnet test AcceptanceTests/AcceptanceTests.csproj  --verbosity normal -l:trx
+        run: dotnet test AcceptanceTests/AcceptanceTests.csproj --configuration Release --no-build  --verbosity normal -l:trx
 
       # publish web app ready for deployment
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
+        run: dotnet publish BPCalculator/BPCalculator.csproj -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
