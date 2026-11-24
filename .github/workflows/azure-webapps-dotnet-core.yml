@@ -53,6 +53,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v4
+      with:
+        name: .net-app
       
     # Deploy to Azure app service to staging slot using publish profile for staging slot
     - name: Run Azure webapp deploy action using publish profile credentials
